@@ -842,7 +842,7 @@ General check of Python Type
 .. c:function:: int PyArray_CheckScalar(PyObject *op)
 
     Evaluates true if *op* is either an array scalar (an instance of a
-    sub-type of :c:data:`PyGenericArr_Type` ), or an instance of (a
+    sub-type of :c:type:`PyGenericArrType_Type` ), or an instance of (a
     sub-class of) :c:data:`PyArray_Type` whose dimensionality is 0.
 
 .. c:function:: int PyArray_IsPythonNumber(PyObject *op)
@@ -859,13 +859,13 @@ General check of Python Type
 
     Evaluates true if *op* is either a Python scalar object (see
     :c:func:`PyArray_IsPythonScalar`) or an array scalar (an instance of a sub-
-    type of :c:data:`PyGenericArr_Type` ).
+    type of :c:type:`PyGenericArrType_Type` ).
 
 .. c:function:: int PyArray_CheckAnyScalar(PyObject *op)
 
     Evaluates true if *op* is a Python scalar object (see
     :c:func:`PyArray_IsPythonScalar`), an array scalar (an instance of a
-    sub-type of :c:data:`PyGenericArr_Type`) or an instance of a sub-type of
+    sub-type of :c:type:`PyGenericArrType_Type`) or an instance of a sub-type of
     :c:data:`PyArray_Type` whose dimensionality is 0.
 
 
@@ -1539,6 +1539,19 @@ specify desired properties of the new array.
 .. c:macro:: NPY_ARRAY_ENSUREARRAY
 
     Make sure the resulting object is an actual ndarray, and not a sub-class.
+
+These constant are used in :c:func:`PyArray_DescrNewByteorder` to describe the
+byteorder of the new datatype.
+
+.. c:macro:: NPY_IGNORE
+
+.. c:macro:: NPY_SWAP
+
+.. c:macro:: NPY_NATIVE
+
+.. c:macro:: NPY_LITTLE
+
+.. c:macro:: NPY_BIG
 
 
 Flag checking
@@ -2836,15 +2849,6 @@ Data-type descriptors
     *newendian*. All referenced data-type objects (in subdescr and
     fields members of the data-type object) are also changed
     (recursively).
-
-    The value of *newendian* is one of these macros:
-
-    .. c:macro:: NPY_IGNORE
-                 NPY_SWAP
-                 NPY_NATIVE
-                 NPY_LITTLE
-                 NPY_BIG
-
     If a byteorder of :c:data:`NPY_IGNORE` is encountered it
     is left alone. If newendian is :c:data:`NPY_SWAP`, then all byte-orders
     are swapped. Other valid newendian values are :c:data:`NPY_NATIVE`,
