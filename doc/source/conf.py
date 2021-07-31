@@ -122,6 +122,9 @@ today_fmt = '%B %d, %Y'
 # The reST default role (used for this markup: `text`) to use for all documents.
 default_role = "autolink"
 
+# The numpy parameter configuration
+numpydoc_role_param = ':emphasis:'
+
 # List of directories, relative to source directories, that shouldn't be searched
 # for source files.
 exclude_dirs = []
